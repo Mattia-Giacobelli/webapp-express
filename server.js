@@ -5,8 +5,9 @@ const PORT = 3000
 //Import router
 const moviesRouter = require('./routes/movies')
 
-//Import middlewares
+//Import error middlewares
 const notFound = require('./middlewares/notFound')
+const serverError = require('./middlewares/serverError')
 
 app.use(express.json())
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(notFound)
+app.use(serverError)
 
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
