@@ -11,6 +11,6 @@ const router = express.Router()
 router.get('/', moviesController.index)
 
 //Show route
-router.get('/:id', moviesController.index)
+router.get('/:id', moviesController.show)
 
 module.exports = router
