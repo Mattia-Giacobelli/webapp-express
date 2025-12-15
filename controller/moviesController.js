@@ -13,7 +13,7 @@ function index(req, res) {
     })
 }
 
-
+//Show
 function show(req, res) {
     const id = Number(req.params.id)
     //Movie query
@@ -39,5 +39,21 @@ function show(req, res) {
 
 }
 
+//Store review
+function storeReview(req, res) {
 
-module.exports = { index, show }
+    const id = req.params.id
+
+    const { name, vote, text } = req.body
+
+
+    //Store review query
+    const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?,?,?,?)'
+
+    connection.query(sql, [id, name, vote, text], (err, results) => {
+        if (err) return res.status(500).json({ error: true, message: err.message })
+        if (results.length === 0) return res.status(404).json({ error: true, message: 'Not Found' })
+    }
+}
+
+module.exports = { index, show, storeReview }
