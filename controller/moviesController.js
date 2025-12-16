@@ -57,11 +57,11 @@ function storeReview(req, res) {
 
     //Add validation for blank fields
     if (name === "") {
-        return res.status(400).send("Name field can't be empty")
+        return res.json({ status: 400, error: "Name field can't be empty" })
     } else if (vote === "") {
-        return res.status(400).send("Vote field can't be empty")
+        return res.json({ status: 400, error: "Vote field can't be empty" })
     } else if (text === "") {
-        return res.status(400).send("Text field can't be empty")
+        return res.json({ status: 400, error: "Text field can't be empty" })
     }
 
 
