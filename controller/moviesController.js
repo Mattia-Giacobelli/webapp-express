@@ -16,6 +16,8 @@ function index(req, res) {
 //Show
 function show(req, res) {
     const id = Number(req.params.id)
+
+
     //Movie query
     const sql = 'SELECT * FROM movies WHERE id = ?'
     //Movie's review query
@@ -44,16 +46,30 @@ function storeReview(req, res) {
 
     const id = req.params.id
 
-    const { name, vote, text } = req.body
 
+
+    const { name, vote, text } = req.body
+    console.log(req.body);
 
     //Store review query
     const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?,?,?,?)'
 
+
+    //Add validation for blank fields
+    if (name === "") {
+        return res.status(400).send("Name field can't be empty")
+    } else if (vote === "") {
+        return res.status(400).send("Vote field can't be empty")
+    } else if (text === "") {
+        return res.status(400).send("Text field can't be empty")
+    }
+
+
     connection.query(sql, [id, name, vote, text], (err, results) => {
         if (err) return res.status(500).json({ error: true, message: err.message })
-        if (results.length === 0) return res.status(404).json({ error: true, message: 'Not Found' })
-    }
+
+        res.status(201).json({ request: "received", id: results.id })
+    })
 }
 
 module.exports = { index, show, storeReview }

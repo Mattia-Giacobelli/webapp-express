@@ -1,6 +1,5 @@
 function serverError(err, req, res, next) {
 
-    console.log('500 works');
 
 
     res.status(500)

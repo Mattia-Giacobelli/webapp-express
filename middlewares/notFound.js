@@ -1,8 +1,8 @@
-function notFound(err, res, req, next) {
+function notFound(err, req, res, next) {
     res.status(404)
 
     res.json({
-        error: 'Not Found',
+        error: 'Not Found middleware',
         message: "Page not found"
     })
 }
